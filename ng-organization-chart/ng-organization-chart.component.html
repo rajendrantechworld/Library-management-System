@@ -1,0 +1,14 @@
+<div class="Zoom">
+    <button class="btn" [disabled]="zoom == 100" (click)="zoomIn()" title="Zoom in"> + </button>
+    <button class="btn" [disabled]="zoom == 50" (click)="zoomOut()" title="Zoom out"> - </button>
+</div>
+<ng-organization-chart-list 
+    [ngStyle] = "{'zoom': zoom + '%'}"
+    [ngClass]="'ng-organization-chart-list'" 
+    [nodeList]="data" 
+    (onViewNode)="onViewDeepNode($event)" 
+    (onClickNode)="onClickDeepNode($event)" 
+    (onEditNode)="onEditDeepNode($event)" 
+    (onAddAttributesNode)="onAddAttributesDeepNode($event)" 
+    (onDragNode)="onDragDeepNode($event)" style="display: inline-block; width: max-content; overflow-x: auto;">
+</ng-organization-chart-list>

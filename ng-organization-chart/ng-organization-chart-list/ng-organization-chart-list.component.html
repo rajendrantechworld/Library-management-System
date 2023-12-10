@@ -1,0 +1,10 @@
+<ng-organization-chart-node 
+    [ngClass]="'ng-organization-chart-node'" 
+    *ngFor="let node of nodeList" 
+    [node]="node" 
+    (onViewNode)="onViewDeepNode($event)"  
+    (onClickNode)="onClickDeepNode($event)" 
+    (onEditNode)="onEditDeepNode($event)" 
+    (onAddAttributesNode)="onAddAttributesDeepNode($event)" 
+    (onDragNode)="onDragDeepNode($event)">
+</ng-organization-chart-node>

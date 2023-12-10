@@ -1,0 +1,90 @@
+ ng-organization-chart-list {
+	padding-top: 20px; position: relative;
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+    display: block;
+}
+
+/*Time to add downward connectors from parents*/
+ ng-organization-chart-list::before{
+	content: '';
+	position: absolute; top: 0; left: 50%;
+	border-left: 1px solid #ccc;
+	width: 0; height: 20px;
+}
+
+.node_container{
+	cursor : default;
+	border : 1px solid #e7e7e7;
+	display : inline-block;
+	padding : 5px;
+	max-width: 200px;
+	min-width:130px;
+	min-height: 70px;
+	background: #ffffff; /* Old browsers */
+	background: -moz-linear-gradient(top, #ffffff 0%, #fbfbfb 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #fbfbfb)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #ffffff 0%, #fbfbfb 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #ffffff 0%, #fbfbfb 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #ffffff 0%, #fbfbfb 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #ffffff 0%, #fbfbfb 100%); /* W3C */
+	line-height : 1.3em;
+	border-radius : 4px;
+	-moz-border-radius : 4px;
+	-webkit-border-radius : 4px;
+	position: relative;
+	box-shadow: 1px 1px 0px #ddd;
+}
+
+.addArrt{
+	clear: both;
+    background: #eee;
+    padding: 3px 5px;
+    top: 6px;
+	position: relative;
+	margin-bottom:5px; 
+}
+.inactive{
+	color :red;
+}
+.modulename{
+	padding: 4px 8px;
+	color:#FFF;
+	margin-right: 5px;
+	border-radius: 50%;
+}
+.modulename.manager{
+	background-color: #93C!important;
+	padding: 4px 6px;
+}
+.modulename.sales{
+	background-color: #ff6d00!important;
+}
+.avt{
+	width:60px;
+	height:72px;
+	float:left;
+	background-position:center;
+	background-size:cover;
+}
+.avt.Photo{
+	float: left;
+	cursor: pointer;
+	background-size: cover !important;
+    background-position: center !important;
+}
+.userInfo{
+	float: right;
+}
+.userInfo::after{
+	clear: both;
+}
+.userInfo{
+	width: 125px;
+	/* white-space: nowrap; 
+	overflow: hidden;
+	text-overflow: ellipsis;  */
+	word-wrap: break-word;
+    padding-left: 5px;
+}

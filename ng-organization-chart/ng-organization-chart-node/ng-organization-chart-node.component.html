@@ -1,0 +1,59 @@
+<!-- <a (click)="clickNode()" dnd-draggable [dragEnabled]="true" dnd-droppable (onDropSuccess)="dropNode($event)" [dragData]="node">{{ node.id}}</a> -->
+<div class="node_container"  draggable droppable [dragData]="node" (onDrop)="dropNode($event)"  >
+    <div [ngClass]="{'Photo':node.isUser}" *ngIf="node.isUser" 
+        class="avt" 
+        (click)="userView()" title="click to view"
+        [ngStyle]="{'background': 'url(' + node.Photo + ')'}">
+    </div>
+    <div class="textOverlow" [ngClass]="{'userInfo':node.isUser}"  [ngClass]="{'row':!node.isUser}">
+            <label [ngClass]="{'inactive':node.changeColor}" *ngIf="!node.isUser"> {{ node.Name}}</label>
+            <label [ngStyle]="{'color': node.User_State == 0 ? 'red' : 'black'}" *ngIf="node.isUser"> {{ node.Name}}</label><br/>
+            <label *ngIf="node.isUser" >( {{node.designationName}} <strong>{{node.Level}}</strong>)</label><br/>         
+    </div>
+   
+   <div class="row" *ngIf="node.showAddButton || node.showEditButton">
+        <div class="col-md-6 text-left pull-left" *ngIf="node.showAddButton">
+                <a href="javascript:void(0)" (click)="clickNode()" title="click to add" >
+                    <i class="fa fa-plus-square" aria-hidden="true"></i>
+                </a>
+        </div>
+        <div class="col-md-6 text-right pull-right" *ngIf="node.showEditButton">
+                <a href="javascript:void(0)"  (click)="nodeEdit()" title="click to edit">
+                    <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                </a>
+        </div>
+    </div>
+    <div class="addArrt" *ngIf="node.showAttributes && node.children.length == 0">
+        <a href="javascript:void(0)" (click)="nodeAttributes()">Add Attribute</a>
+    </div>
+    <div class="row">
+            <!-- <span *ngIf="node.managerModule" title="Manager Module"  class="modulename manager">M</span>
+            <span *ngIf="node.executiveModile" title="Executive Module" class="modulename sales">E</span> -->
+            <ng-container *ngFor="let mod of node.SelectedModules">
+                    <span  title="{{mod.Module_Name}} Module" class="modulename manager" *ngIf="mod.Id == 2">
+                        {{(mod.Module_Name | slice:0:1)}}
+                    </span>
+                    <span  title="{{mod.Module_Name}} Module" class="modulename sales" *ngIf="mod.Id == 3">
+                        {{(mod.Module_Name | slice:0:1)}}
+                    </span>
+            </ng-container>
+            
+    </div>
+    
+</div>
+<div class="expand-button-container" *ngIf="node.children.length > 0">
+    <!--
+    <div class="expand-button" (click)="changeChildrenStyleToHorizontal()" *ngIf="childrenStyleClass == 'vertical'">V</div>
+    <div class="expand-button" (click)="changeChildrenStyleToVertical()" *ngIf="childrenStyleClass != 'vertical'">H</div>
+    -->
+</div>
+<ng-organization-chart-list 
+    [ngClass]="'ng-organization-chart-list'" 
+    [nodeList]="node.children" 
+    (onViewNode)="onViewDeepNode($event)" 
+    (onClickNode)="onClickDeepNode($event)" 
+    (onEditNode)="onEditDeepNode($event)" 
+    (onAddAttributesNode)="onAddAttributesDeepNode($event)" 
+    (onDragNode)="onDragDeepNode($event)" 
+    *ngIf="isChildrenVisible && node.children.length > 0"
+    [class]="childrenStyleClass"></ng-organization-chart-list>

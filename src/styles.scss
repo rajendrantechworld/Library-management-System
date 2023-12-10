@@ -1,0 +1,91 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./assets/styles/index.scss";
+@import 'themify-icons';
+@import 'override-plugins';
+
+.pointer{
+    cursor: pointer;
+}
+.text-new {
+  color:#45aed8 !important;
+}
+
+.agent-bg{
+  background-color: #3A678B;
+}
+.jstree-default .jstree-anchor{
+  color: #000;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.configure-table{
+    input,button{
+        font-size: 12px;
+    }
+}
+
+button:focus {
+    outline: none;
+}
+
+::placeholder{
+  font-size: 13px;
+}
+//scrollbar
+::-webkit-scrollbar {
+    width: 0px;
+    height: 4px;              /* height of horizontal scrollbar */
+
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #bbb;
+    border-radius: 5px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.085rem rgba(0, 123, 255, 0.25);
+}
+
+.text-light-blue {
+  color: #3c8dbc !important;
+}
+.text-green {
+  color: #00a65a !important;
+}
+html,body {
+  scroll-behavior: smooth;
+}
+
+
+.back{
+  color: #000;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+@media (min-width: 576px){
+  .form-inline .input-group, .form-inline .custom-select {
+    width:80 !important;
+  }
+      /* width: auto; */
+  }
+
+
+
+  .ng-wizard-theme-arrows>ul.step-anchor>li.active>a:after {
+    border-left: 30px solid #5cb85c!important; 
+}

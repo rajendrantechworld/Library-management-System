@@ -1,0 +1,19 @@
+.clrParent{
+  position: relative;
+  .mBtnDiv{
+    padding-top: 10px;
+    background: white;
+    margin-top: -7px;
+    button{
+      border-radius: 0;
+      width: 100%;
+    }
+  }
+  .close{
+    position: absolute;
+    border-radius: 50%;
+    top: 0;
+    z-index: 1000;
+    right: 0;
+  }
+}

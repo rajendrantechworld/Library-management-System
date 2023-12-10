@@ -1,0 +1,28 @@
+nav{
+    background-color:rgb(40,69,119);
+   padding: 10px;
+    
+}
+nav ul{
+    float: right;
+    list-style: none;
+
+}
+nav a{
+    color: white;
+    text-decoration: none;
+}
+ul li{
+    display: inline-block;
+    padding: 10px;
+
+}
+li a{
+    color: white;
+    text-decoration: none;
+    
+}
+nav i, li i{
+    color: white;
+    cursor: pointer;
+}

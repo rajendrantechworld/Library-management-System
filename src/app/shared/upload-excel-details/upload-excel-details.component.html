@@ -1,0 +1,103 @@
+<div>
+  <div class="uploadMain">
+    <div class="uploadHeaderBox" >
+      <span style="text-transform: capitalize;">{{data.module}} File Upload</span>
+      <span style="z-index: 100;">
+        <span (click)="minimiseDialogue()"><i class="c-white-500 ti-minus px-2 py-2"></i></span>
+        <span (click)="closeUploadDialogue(confirmConfig)"><i class="c-white-500 ti-close px-2 py-2"></i></span>
+      </span>
+    </div>
+    <div class="uploadBody" [ngClass]="minimiseClass" >
+        <div *ngIf="!apiCalled.status">
+          <div class="excelDiv">
+            <div class="parent_div bgc-green-100 c-green-500">
+              <span><i class="fa fa-file-excel-o" aria-hidden="true"></i> <span style="font-size: 1vw">Excel</span></span>
+              <span><span class="fileNameDots">
+                <span>{{data?.excelname}}</span>
+              </span> <i class="fa ti-check tickMark bgc-green-200" aria-hidden="true"></i></span>
+            </div>
+            <div class="size">
+              <span >{{data?.size}}</span>
+            </div>
+          </div>
+
+          <div class="" *ngIf="!fileSize && data?.isZip ">
+            <div class="uploadFileSection">
+              <div class="templateIcon">
+                <i class="ti-zip"></i>
+              </div>
+                <span style="font-size: 1vw">Drop your zip file here. </span>
+                <span style="font-size: 1.2vw">Or <span class="c-blue-300">Browse</span></span>
+              <input #uploadFile type="file" accept=".zip" (click)="uploadFile.value = ''" (change)="uploadZipWithExcelFile($event.target.files)" name="uploadExcel" placeholder="Upload XL"/>
+            </div>
+
+          </div>
+          <div *ngIf="fileSize">
+            <div class="excelDiv bgc-orange-100 c-orange-500">
+              <span><i class="fa ti-zip" aria-hidden="true"></i> <span style="font-size: 1vw">Zip</span></span>
+              <span><span class="fileNameDots">{{uploadDetails[0]?.name}}</span> <i class="fa ti-check tickMark bgc-orange-200" aria-hidden="true"></i></span>
+            </div>
+          </div>
+          <div class="submitBtnDiv"><button class="btn btn-primary" (click)="uploadToServer()" [disabled]="!fileSize && data?.isZip">Submit</button></div>
+        </div>
+        <div class="uploadingInProgress" [ngClass]="apiCalled.text == 'Failed!'?'bgc-red-50':apiCalled.text == 'Uploaded'?'bgc-green-50 uploadedSuccess':''" *ngIf="apiCalled.status">
+          <span [ngClass]="apiCalled.text == 'Failed!'?'c-red-500':apiCalled.text == 'Uploaded'?'c-green-500':''">{{apiCalled.text}}</span>
+          <div class="progressDiv">
+            <span class="statusDiv"><span>{{fileSize}}</span> <span >{{progress}}%</span></span>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" [ngClass]="apiCalled.text == 'Failed!'?'bg-danger':'bg-success'" role="progressbar" [ngStyle]="{width: progress+'%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="uploadedStatus">
+          <div class="uploadedResult bgc-grey-50">
+            <div class="count bgc-blue-50">
+              <div>Generated Count</div>
+              {{uploadedStatus.product_generated}}
+            </div>
+            <div class="count bgc-red-50">
+              <div>Rejected Count</div>
+              {{uploadedStatus.rejected_count}}
+            </div>
+            <div *ngIf="ishaveFailedReport.flag" class="importedreport">
+              <p>Report Status</p>
+              <button type="button" class="btn btn-outline-dark rounded-pill btn-sm" (click)="downloadRejectedReport()"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Download</button>
+            </div>
+            <div class="rejected bgc-red-80" *ngIf="uploadedStatus.rejected_products_details.length != 0">
+              <div class="title bgc-red-300">Rejected {{data.module}}</div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Reason</th>
+                    <th>Prod Name</th>
+                    <th>SKU</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of uploadedStatus.rejected_products_details">
+                    <td>{{item.Reason}}</td>
+                    <td>{{item['prod name']}}</td>
+                    <td>{{item['sku name']}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+  </div>
+</div>
+<ng-template #confirmConfig let-modal class="confirmBox">
+  <!-- HEADER -->
+  <div class="modal-header boxHeader">
+      <h5 class="modal-title c-red-300">Confirmation</h5>
+      <h6 class="modal-title" style="font-size: 1vw;">Do you want to cancel the process?</h6>
+  </div>
+  <!-- BODY FOR ADD AND EDIT -->
+  <div class="modal-body boxBody">
+      <button class="btn btn-light" (click)="modal.dismiss()">Cancel</button>
+      <button class="btn btn-danger" (click)="cancelUpload()">Confirm</button>
+  </div>
+</ng-template>
